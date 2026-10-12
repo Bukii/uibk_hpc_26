@@ -18,8 +18,7 @@ Generally, topics discussed here include
 
 This schedule gives you an overview of the topics we will discuss on each date.
 It will be updated continuously throughout the semester. Note that exercises
-associated with a given date are to be discussed on that day, i.e., solutions
-for that assignment have to be handed in via OLAT by 17:00 on Monday.
+associated with a given date are to be discussed on that day.
 
 | Date       | Assignment | Topics                                                      |
 | ---------- | ---------- | ----------------------------------------------------------- |
@@ -27,9 +26,9 @@ for that assignment have to be handed in via OLAT by 17:00 on Monday.
 
 ## Handing in and Presenting Solutions
 
-All the material required by the given tasks (e.g. code, figures, etc...) must be 
-part of the solution that is handed in. Your experiments should be reproducible and 
-comparable to your own measurements using the solution materials that you hand in.
+Note that no material needs to be handed in, but all the material required by the given tasks (e.g. code, figures,
+etc...) must be available during your presentation. Your experiments should be reproducible and comparable to your own
+measurements using the solution materials that you hand in.
 
 **Please run any benchmarks or heavy CPU loads only on the compute nodes, not on the login node.**
 If you want to do some interactive experimentation, use an *interactive job*. Make 
