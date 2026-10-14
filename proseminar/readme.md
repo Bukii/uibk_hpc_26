@@ -23,6 +23,8 @@ associated with a given date are to be discussed on that day.
 | Date       | Assignment | Topics                                                      |
 | ---------- | ---------- | ----------------------------------------------------------- |
 | 2026-10-07 | -          | Administrative matters, introduction to LCC3                |
+| 2026-10-14 | [1](01)    | SLURM Job Submission, basic cluster setup and measurements  |
+| 2026-10-21 | [2](02)    | Basic parallelization with MPI                              |
 
 ## Handing in and Presenting Solutions
 
