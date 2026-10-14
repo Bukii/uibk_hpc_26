@@ -43,6 +43,8 @@
   .reveal {
     // inline code: the orange used on black is unreadable on white
     code { color: #a05f00; }
+    // ...except on the navy cards of `.process`, which stay dark
+    .process code { color: #{$uibk-orange}; }
     // Quarto renders `::: {.aside}` as an <aside> element and colours it
     // white itself, which the class selector alone does not reach.
     .aside, .slide aside { color: #55657a; }

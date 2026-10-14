@@ -3,7 +3,11 @@
 \documentclass[dvisvgm,border=3pt]{standalone}
 \input{preamble.tex}
 \begin{document}
-\begin{tikzpicture}
+% Shown next to a full column of text, so the text is set larger than the
+% preamble's default.
+\begin{tikzpicture}[
+    lbl/.append style={font=\sffamily\Large},
+    lblsm/.append style={font=\sffamily\large}]
 
   \ranktimeline{0}{rank 0}{8.2}
   \ranktimeline{5.0}{rank 1}{8.2}

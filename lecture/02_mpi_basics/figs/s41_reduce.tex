@@ -4,7 +4,9 @@
 \documentclass[dvisvgm,border=3pt]{standalone}
 \input{preamble.tex}
 \begin{document}
-\begin{tikzpicture}
+% The cell numbers are set larger than the preamble's default, to stay legible
+% at the size the figure is shown.
+\begin{tikzpicture}[cellnum/.append style={font=\sffamily\normalsize}]
 
   % 4-cell buffers are centred on the rank: left edge = centre - 2*\cellw
   \newcommand{\bufa}{0.92}   % left column

@@ -37,9 +37,14 @@ def style(ax, t):
     ax.set_axisbelow(True)
 
 
+# The slide shows the charts at a fixed height, so a smaller canvas means
+# larger text and markers on the slide; at 10 x 4.8 in the labels were tiny.
+FIGSIZE = (7.6, 3.65)
+
+
 def chart_latency(t, cats, cols, path):
     """Slide 49: latency only."""
-    fig, ax = plt.subplots(figsize=(10, 4.8))
+    fig, ax = plt.subplots(figsize=FIGSIZE)
     ax.plot(cats, cols["latency intra socket"], "-o", color=t.blu,
             linewidth=2.2, markersize=6, label="latency intra socket")
     ax.plot(cats, cols["latency inter socket"], "-s", color=t.orange,
@@ -48,7 +53,7 @@ def chart_latency(t, cats, cols, path):
     ax.set_ylabel("latency [us]")
     ax.set_ylim(0, 4000)
     style(ax, t)
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.16), ncol=2)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2)
     fig.tight_layout()
     fig.savefig(path, format="svg", transparent=True, bbox_inches="tight")
     plt.close(fig)
@@ -57,7 +62,7 @@ def chart_latency(t, cats, cols, path):
 
 def chart_latency_l3(t, cats, cols, path):
     """Slide 50: latency plus L3 cache misses on a secondary axis."""
-    fig, ax = plt.subplots(figsize=(10, 4.8))
+    fig, ax = plt.subplots(figsize=FIGSIZE)
     ax.plot(cats, cols["latency intra socket"], "-o", color=t.blu,
             linewidth=2.2, markersize=6, label="latency intra socket")
     ax.plot(cats, cols["latency inter socket"], "-s", color=t.orange,
@@ -84,7 +89,7 @@ def chart_latency_l3(t, cats, cols, path):
     handles = ax.get_legend_handles_labels()[0] + ax2.get_legend_handles_labels()[0]
     labels = ax.get_legend_handles_labels()[1] + ax2.get_legend_handles_labels()[1]
     ax.legend(handles, labels, loc="upper center",
-              bbox_to_anchor=(0.5, -0.16), ncol=2)
+              bbox_to_anchor=(0.5, -0.22), ncol=2)
 
     fig.tight_layout()
     fig.savefig(path, format="svg", transparent=True, bbox_inches="tight")

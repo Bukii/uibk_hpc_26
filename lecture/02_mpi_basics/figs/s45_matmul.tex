@@ -5,7 +5,10 @@
 \documentclass[dvisvgm,border=3pt]{standalone}
 \input{preamble.tex}
 \begin{document}
-\begin{tikzpicture}[x=1cm,y=1cm]
+% Shown in half a slide, so the text is set larger than the preamble's default.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    lbl/.append style={font=\sffamily\Large},
+    subcap/.append style={font=\sffamily\normalsize}]
 
   \def\cs{0.52}   % cell size of the big matrices
   \def\rs{0.34}   % cell size of the per-rank miniatures

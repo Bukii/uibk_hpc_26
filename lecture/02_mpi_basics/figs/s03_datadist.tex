@@ -5,7 +5,8 @@
 \documentclass[dvisvgm,border=3pt]{standalone}
 \input{preamble.tex}
 \begin{document}
-\begin{tikzpicture}[x=1cm,y=1cm]
+\begin{tikzpicture}[x=1cm,y=1cm,
+    lbl/.append style={font=\sffamily\large}]
 
   \def\cs{0.42}
 
@@ -49,7 +50,7 @@
 
   \draw[-{Stealth[length=5mm,width=5mm]},draw=blu,line width=3pt]
     (10.80,0) -- (11.75,0);
-  \node[lbl,anchor=west,font=\sffamily\itshape\small] at (12.00,0)
+  \node[lbl,anchor=west,font=\sffamily\itshape\large] at (12.00,0)
     {``tomorrow: 12$^\circ$ C, sunny''};
 
   % ======================= legend ==========================================

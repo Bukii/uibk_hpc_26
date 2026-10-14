@@ -140,7 +140,7 @@ digraph mpmd {
 
   // the two programs differ; only the messages connect them
   cpu0 -> cpu1 [dir=both, style=dashed, constraint=false, color="#F39200",
-                label="MSG", fontcolor="#F39200", fontsize=10];
+                label="MSG ", fontcolor="#F39200", fontsize=10];
 }
 ```
 
@@ -167,7 +167,7 @@ digraph spmd {
   exe -> cpu1;
 
   cpu0 -> cpu1 [dir=both, style=dashed, constraint=false, color="#F39200",
-                label="MSG", fontcolor="#F39200", fontsize=10];
+                label="MSG ", fontcolor="#F39200", fontsize=10];
 }
 ```
 
@@ -214,33 +214,31 @@ int main() {
   - alternatively `srun`
   - preferably what the platform documentation recommends
 
-## Startup procedure of an MPI application
+## Startup procedure of an MPI application {.center-figs}
 
-```{dot}
-//| label: startup
-digraph startup {
-  rankdir=LR; bgcolor="transparent"; nodesep=0.35; ranksep=0.55;
-  node [shape=box, style="filled,rounded", fillcolor="#003361",
-        color="#7FB0E0", fontcolor="#F2F4F7", fontname="Calibri",
-        fontsize=12, penwidth=1.0, margin="0.18,0.12"];
-  edge [color="#F39200", penwidth=1.4, arrowsize=0.8];
+:::: {.process}
+::: {.step}
+slurm
 
-  slurm [label=<<B>SLURM job submission</B><BR ALIGN="CENTER"/>
-                <FONT POINT-SIZE="11">allocates resources<BR ALIGN="LEFT"/>
-                sets environment<BR ALIGN="LEFT"/>
-                calls mpiexec / mpirun / srun<BR ALIGN="LEFT"/></FONT>>];
-  launch [label=<<B>mpiexec</B><BR ALIGN="CENTER"/>
-                <FONT POINT-SIZE="11">reads SLURM environment<BR ALIGN="LEFT"/>
-                spawns processes<BR ALIGN="LEFT"/>
-                connects to nodes<BR ALIGN="LEFT"/></FONT>>];
-  calls  [label=<<B>MPI function calls</B><BR ALIGN="CENTER"/>
-                <FONT POINT-SIZE="11">exchange messages<BR ALIGN="LEFT"/>
-                synchronize<BR ALIGN="LEFT"/>
-                identify processes<BR ALIGN="LEFT"/></FONT>>];
+- allocates resources
+- sets environment
+- calls `mpiexec` / `mpirun` / `srun`
+:::
+::: {.step}
+launcher (`mpiexec`)
 
-  slurm -> launch -> calls;
-}
-```
+- reads SLURM environment
+- spawns processes
+- connects to nodes
+:::
+::: {.step}
+MPI function calls
+
+- exchange messages
+- synchronize
+- identify processes
+:::
+::::
 
 ## Hello world in MPI
 
@@ -470,7 +468,7 @@ if (rank == 0) {
 ## Message order preservation
 
 :::: {.columns}
-::: {.column width="50%"}
+::: {.column width="42%"}
 - messages do NOT overtake each other if
   - same communicator
   - same source rank
@@ -478,7 +476,7 @@ if (rank == 0) {
 - regardless of blocking or synchronization mode
 - mandated by MPI specification
 :::
-::: {.column width="50%"}
+::: {.column width="58%"}
 ![](figs/out/s30_order.svg){width="100%"}
 :::
 ::::
@@ -589,7 +587,7 @@ if (rank == 0) {
   - size and structure of data
   - hardware capabilities
 
-![](figs/out/s39_patterns.svg){fig-align="center" height="230"}
+![](figs/out/s39_patterns.svg){fig-align="center" height="250"}
 
 ## Barrier
 
@@ -696,9 +694,10 @@ void print_matrix(int m[SIZE][SIZE]);
 :::
 ::::
 
-## Example code: naïve matrix multiplication cont'd {.smaller}
+## Example code: naïve matrix multiplication cont'd
 
-```{.c filename="code/matmul_mpi.c" code-line-numbers="|3-4|7-10|13-16|19-20|23-24|27"}
+::: {.code-cols break="18"}
+```{.c filename="code/matmul_mpi.c" code-line-numbers="|3-4|7-10|13-16|19-20|23-25|28-29"}
 int myRank, numProcs;
 MPI_Init(&argc, &argv);
 MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
@@ -721,16 +720,20 @@ int start = myRank*SIZE/numProcs;
 int end = (myRank+1)*SIZE/numProcs;
 
 // distribute rows of A to everyone
-MPI_Scatter(A, SIZE*SIZE/numProcs, MPI_INT, A[start], SIZE*SIZE/numProcs, MPI_INT, 0,
-            MPI_COMM_WORLD);
+MPI_Scatter(A, SIZE*SIZE/numProcs, MPI_INT,
+            A[start], SIZE*SIZE/numProcs,
+            MPI_INT, 0, MPI_COMM_WORLD);
 
 // send entire matrix B to everyone
-MPI_Bcast(B, SIZE*SIZE, MPI_INT, 0, MPI_COMM_WORLD);
+MPI_Bcast(B, SIZE*SIZE, MPI_INT, 0,
+          MPI_COMM_WORLD);
 ```
+:::
 
 ## Example code: naïve matrix multiplication cont'd
 
-```{.c filename="code/matmul_mpi.c" code-line-numbers="|2-10|13-14|16"}
+::: {.code-cols break="11"}
+```{.c filename="code/matmul_mpi.c" code-line-numbers="|2-10|12-14|17"}
 // local computation of every rank
 for(int i = start; i < end; i++) {
     for(int j = 0; j < SIZE; j++) {
@@ -742,13 +745,15 @@ for(int i = start; i < end; i++) {
 }
 
 // gather result rows back to root
-MPI_Gather(C[start], SIZE*SIZE/numProcs, MPI_INT, C, SIZE*SIZE/numProcs, MPI_INT, 0,
-           MPI_COMM_WORLD);
+MPI_Gather(C[start], SIZE*SIZE/numProcs,
+           MPI_INT, C, SIZE*SIZE/numProcs,
+           MPI_INT, 0, MPI_COMM_WORLD);
 
 if(myRank == 0) { print_matrix(C); }
 MPI_Finalize();
 return EXIT_SUCCESS;
 ```
+:::
 
 ::: {.aside}
 Complete program: [`code/matmul_mpi.c`](code/matmul_mpi.c) — compile with `mpicc -o matmul code/matmul_mpi.c`, run with `mpiexec -n 4 ./matmul`

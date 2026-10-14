@@ -115,6 +115,88 @@ html.print-pdf .reveal .slides section.center-figs {
 .reveal .steps > :nth-child(even) { text-align: center; }
 .reveal .steps > :nth-child(even) img { height: 150px; margin: 0; }
 
+// A left-to-right sequence of steps (`:::: {.process}`, one `::: {.step}` div
+// per step: a title paragraph, then a list). The steps are numbered automatically
+// and joined by arrows drawn in the gaps between them. The cards are navy in
+// both themes, like the code blocks, so their ink does not flip.
+$process-gap: 2em;
+.reveal .process {
+  display: flex;
+  align-items: stretch;
+  gap: $process-gap;
+  margin: 0.4em 0;
+  font-size: 0.9em;
+  counter-reset: process-step;
+}
+.reveal .process > div {
+  flex: 1 1 auto;
+  position: relative;
+  counter-increment: process-step;
+  padding: 0.55em 0.8em 0.65em;
+  background: $uibk-navy;
+  color: #f2f4f7;
+  border: 1px solid #7fb0e0;
+  border-radius: 8px;
+}
+.reveal .process > div > p:first-child {
+  margin: 0 0 0.35em;
+  font-weight: bold;
+}
+.reveal .process > div > p:first-child::before {
+  content: counter(process-step);
+  display: inline-flex;
+  vertical-align: middle;
+  margin: -0.1em 0.45em 0 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: $uibk-orange;
+  color: #10243a;
+}
+.reveal .process ul { display: block; margin: 0 0 0 1em; }
+.reveal .process li { margin: 0.15em 0; }
+.reveal .process code { color: $uibk-orange; }
+.reveal .process > div + div::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 0.25em);
+  width: calc(#{$process-gap} - 0.5em);
+  height: 0.9em;
+  transform: translateY(-50%);
+  background: $uibk-orange;
+  clip-path: polygon(0 35%, 55% 35%, 55% 0, 100% 50%, 55% 100%, 55% 65%, 0 65%);
+}
+
+// A long listing set in two newspaper-style columns (`::: {.code-cols}`
+// around one code block). It stays a single block, so line numbers, line
+// highlighting and the copy button work as usual. The columns are balanced;
+// `::: {.code-cols break="18"}` starts the second one at line 18 instead.
+// Line breaks only happen between block boxes, so the line spans become
+// blocks and the newlines between them are collapsed away -- left in, each
+// would render as an extra empty line.
+.reveal .code-cols pre { font-size: 0.75em; }
+.reveal .code-cols pre > code.sourceCode {
+  column-count: 2;
+  column-gap: 3em;  // the second column's line numbers sit in the gap
+  padding-right: 1.5em;  // keeps the copy button clear of the text
+  max-height: none;
+  white-space: normal;
+}
+.reveal .code-cols pre > code.sourceCode > span {
+  display: block;
+  min-height: 1.25em;  // an empty line, which has no text to give it height
+  white-space: pre;
+  break-inside: avoid;
+}
+@for $i from 2 through 99 {
+  .reveal .code-cols[data-break="#{$i}"] pre > code.sourceCode > span:nth-of-type(#{$i}) {
+    break-before: column;
+  }
+}
+
 // Quarto's {{< video >}} shortcode emits a bare <iframe> for reveal.js -- its
 // aspect-ratio option only works in the html format -- which the browser then
 // draws at its default 300x150. Make YouTube embeds fill their container at
