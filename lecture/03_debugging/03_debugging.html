@@ -101,7 +101,7 @@
     code span.vs { color: #e6db74; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../_libs/revealjs/dist/theme/quarto-6f737ba0ebaf1bbb81ee3c116b62bb97.css">
+  <link rel="stylesheet" href="../../_libs/revealjs/dist/theme/quarto-f96e5c45974edb7d546873f341467c6b.css">
   <link href="../../_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -235,6 +235,7 @@ Philipp Gschwandtner
 <h2>Motivation: first Ariane-5 flight, 1996</h2>
 <div class="columns">
 <div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
 <ul>
 <li>Debugging Ariane-5’s maiden flight
 <ul>
@@ -248,17 +249,21 @@ Philipp Gschwandtner
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </div><div class="column" style="width:42%;">
-<p><img data-src="img/image3.jpeg" style="width:100.0%"></p>
+<div class="video-4x3">
+<iframe data-external="1" src="https://www.youtube.com/embed/gp_D8r-2hwk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
 
 </div></div>
 <aside><div>
 <p><a href="https://www.youtube.com/watch?v=gp_D8r-2hwk" class="uri">https://www.youtube.com/watch?v=gp_D8r-2hwk</a></p>
 </div></aside></section>
-<section id="motivation-first-ariane-5-flight-1996-1" class="slide level2 smaller">
+<section id="motivation-first-ariane-5-flight-1996-1" class="slide level2">
 <h2>Motivation: first Ariane-5 flight, 1996</h2>
 <div class="columns">
 <div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
 <ul>
 <li>Debugging Ariane-5’s maiden flight
 <ul>
@@ -272,7 +277,9 @@ Philipp Gschwandtner
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </div><div class="column" style="width:42%;">
+<div style="font-size: 0.85em;">
 <p>&nbsp;</p>
 <!-- one lesson per cause, in the same order as the bullets on the left -->
 <p>➜ &nbsp;bad choice of sentinel values</p>
@@ -280,6 +287,7 @@ Philipp Gschwandtner
 <p>➜ &nbsp;lack of proper requirement analysis</p>
 <p>➜ &nbsp;lack of proper requirement analysis</p>
 <p>➜ &nbsp;debugging code active in release</p>
+</div>
 </div></div>
 </section>
 <section id="motivation" class="slide level2">
@@ -335,6 +343,7 @@ Philipp Gschwandtner
 <h2>Coding guidelines</h2>
 <div class="columns">
 <div class="column" style="width:72%;">
+<div style="font-size: 0.85em;">
 <ul>
 <li>write clean code that prevents bugs or facilitates their detection, e.g.
 <ul>
@@ -353,13 +362,19 @@ Philipp Gschwandtner
 <li>use source version control</li>
 </ul></li>
 </ul>
+</div>
 </div><div class="column" style="width:28%;">
-<p><img data-src="img/image4.png" class="fig-card" style="width:100.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/image4.png" class="fig-card quarto-figure quarto-figure-center" height="440"></p>
+</figure>
+</div>
 </div></div>
 </section>
 <section id="best-of-real-commit-messages-encountered-in-the-past" class="slide level2">
 <h2>“Best of” real commit messages encountered in the past</h2>
-<div class="small">
+<div class="columns" style="font-size: 0.8em;">
+<div class="column" style="width:35%;">
 <ul>
 <li><code>stufF</code></li>
 <li><code>manager stuff</code></li>
@@ -367,13 +382,16 @@ Philipp Gschwandtner
 <li><code>Make things work</code></li>
 <li><code>::w:qMerge branch 'master'</code></li>
 <li><code>dl;adlwa</code></li>
+</ul>
+</div><div class="column" style="width:65%;">
+<ul>
 <li><code>Added performance fix for DataItemManager::get() by caching fragment result in reference</code></li>
 <li><code>Removed debug print statement</code></li>
 <li><code>Fixed a linking issue of the unwrap_tuple function</code></li>
 <li><code>Redirected runtime system output to error stream</code></li>
 <li><code>fixing typos</code></li>
 </ul>
-</div>
+</div></div>
 </section>
 <section id="recommended-readingreference-material-example" class="slide level2">
 <h2>Recommended reading/reference material example</h2>
@@ -418,6 +436,7 @@ Philipp Gschwandtner
 </section>
 <section id="serial-debuggers" class="slide level2">
 <h2>Serial debuggers</h2>
+<div style="font-size: 0.85em;">
 <ul>
 <li><code>gdb</code>
 <ul>
@@ -443,6 +462,7 @@ Philipp Gschwandtner
 <li>there is a dedicated <code>valgrind4hpc</code> (mainly handles output redirection from multiple ranks)</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="sanitizers-still-mostly-serial" class="slide level2">
 <h2>Sanitizers (still mostly serial)</h2>
@@ -461,11 +481,10 @@ Philipp Gschwandtner
 </ul></li>
 </ul>
 </section>
-<section id="example-1-wrong-order-of-arguments-in-mpi-call" class="slide level2 smaller">
+<section id="example-1-wrong-order-of-arguments-in-mpi-call" class="slide level2">
 <h2>Example 1: wrong order of arguments in MPI call</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>MPI_Send<span class="op">(&amp;</span>A_local<span class="op">[</span><span class="dv">0</span><span class="op">],</span> MPI_DOUBLE<span class="op">,</span> N<span class="op">,</span> rank <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> MPI_COMM_WORLD<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Compile with <code>-Wall -Wextra -pedantic</code>:</p>
-<div class="small">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>heat_2D.c: In function 'main':</span>
 <span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>/usr/lib/.../openmpi/include/mpi.h:402:47: warning: passing argument 2 of 'MPI_Send'</span>
 <span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>    makes integer from pointer without a cast [-Wint-conversion]</span>
@@ -480,12 +499,10 @@ Philipp Gschwandtner
 <span id="cb2-12"><a href="" aria-hidden="true" tabindex="-1"></a>  110 | MPI_Send(&amp;A_local[0], MPI_DOUBLE, N, rank - 1, 0, MPI_COMM_WORLD);</span>
 <span id="cb2-13"><a href="" aria-hidden="true" tabindex="-1"></a>      |                                   ^</span>
 <span id="cb2-14"><a href="" aria-hidden="true" tabindex="-1"></a>      |                                   int</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
-<section id="example-2-incorrect-array-indexing" class="slide level2 smaller">
+<section id="example-2-incorrect-array-indexing" class="slide level2">
 <h2>Example 2: incorrect array indexing</h2>
 <p><em>“program hangs” or “receiving garbage in ghost cells”</em></p>
-<div class="small">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>$ mpicc heat_2D_mpi.c -o heat_2D_mpi -O3 -fsanitize=undefined,address -g</span>
 <span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>$ mpiexec -n 2 ./heat_2D_mpi</span>
 <span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
@@ -501,7 +518,6 @@ Philipp Gschwandtner
 <span id="cb3-13"><a href="" aria-hidden="true" tabindex="-1"></a>    #7  0x14f80313d64a in PMPI_Send                    (libmpi.so.40+0xb264a)</span>
 <span id="cb3-14"><a href="" aria-hidden="true" tabindex="-1"></a>    #8  0x402ab6      in main       heat_2D_mpi.c:116</span>
 <span id="cb3-15"><a href="" aria-hidden="true" tabindex="-1"></a>    #9  0x14f8022add84 in __libc_start_main            (/lib64/libc.so.6+0x3ad84)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
 <section id="example-2-incorrect-array-indexing-contd" class="slide level2">
 <h2>Example 2: incorrect array indexing cont’d</h2>
@@ -518,9 +534,8 @@ Philipp Gschwandtner
 <span id="cb4-11"><a href="" aria-label="11"></a>             MPI_STATUS_IGNORE<span class="op">);</span></span>
 <span id="cb4-12"><a href="" aria-label="12"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="example-3-mpi-sendrecv-deadlock" class="slide level2 smaller">
+<section id="example-3-mpi-sendrecv-deadlock" class="slide level2">
 <h2>Example 3: MPI Send/Recv deadlock</h2>
-<div class="small">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>$ mustrun -np 2 ./heat_stencil_2D_mpi --must:output stdout</span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>[MUST] MUST configuration ... centralized checks with fall-back application crash</span>
@@ -537,7 +552,6 @@ Philipp Gschwandtner
 <span id="cb5-14"><a href="" aria-hidden="true" tabindex="-1"></a>[MUST-REPORT] Reference 1: call MPI_Send@rank 0, threadid 0;</span>
 <span id="cb5-15"><a href="" aria-hidden="true" tabindex="-1"></a>[MUST-REPORT] Stacktrace:</span>
 <span id="cb5-16"><a href="" aria-hidden="true" tabindex="-1"></a>[MUST-REPORT] #0  main@heat_stencil_2D_mpi.c:83</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <p>Live demo with MUST (<a href="https://itc.rwth-aachen.de/must/" class="uri">https://itc.rwth-aachen.de/must/</a>)!</p>
 </section>
 <section id="example-3-mpi-sendrecv-deadlock-contd" class="slide level2 center-figs">
@@ -550,6 +564,7 @@ Philipp Gschwandtner
 </section>
 <section id="parallel-debuggers" class="slide level2">
 <h2>Parallel debuggers</h2>
+<div style="font-size: 0.8em;">
 <ul>
 <li>very little free software</li>
 <li>two commercial top dogs: DDT (Linaro) and TotalView (Perforce Software)
@@ -572,6 +587,7 @@ Philipp Gschwandtner
 <li><strong>AutomaDeD</strong>: uses heuristics to find dissimilarities in rank behaviors</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="ddt-screenshot-overview" class="slide level2 center-figs">
 <h2>DDT screenshot (overview)</h2>
@@ -605,6 +621,8 @@ Philipp Gschwandtner
 </section>
 <section id="domain-specific-debugging" class="slide level2">
 <h2>Domain-specific debugging</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <ul>
 <li>visualize the output using appropriate tools
 <ul>
@@ -618,9 +636,11 @@ Philipp Gschwandtner
 <li>whenever feasible, unit and integration tests are preferred</li>
 </ul></li>
 </ul>
+</div><div class="column" style="width:55%;">
 <div class="fig-row">
 <p><img data-src="img/image10.jpeg" height="215"> <img data-src="img/image11.jpeg" height="215"> <img data-src="img/image12.gif" class="fig-card" height="215"></p>
 </div>
+</div></div>
 </section>
 <section id="best-approach-to-debugging-parallel-programs" class="slide level2">
 <h2>Best approach to debugging parallel programs</h2>
@@ -637,10 +657,11 @@ Philipp Gschwandtner
 <li>Don’t trust (seemingly) “automagic” analysis tools too much (LLMs!!!), read and understand the source code when available!</li>
 </ul>
 </section>
-<section id="supercomputer-specific-information" class="slide level2 smaller">
+<section id="supercomputer-specific-information" class="slide level2">
 <h2>Supercomputer-specific information</h2>
 <div class="columns">
 <div class="column" style="width:42%;">
+<div style="font-size: 0.85em;">
 <ul>
 <li>check available SLURM QOS and partitions
 <ul>
@@ -657,8 +678,9 @@ Philipp Gschwandtner
 <li>Don’t run anything parallel on the login node that has even a remote chance of running &gt;1 second!</li>
 </ul></li>
 </ul>
+</div>
 </div><div class="column" style="width:58%;">
-<div class="small">
+<div style="font-size: 0.7em;">
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -979,7 +1001,7 @@ Philipp Gschwandtner
 <section id="tau-paraprof" class="slide level2 center-figs">
 <h2>TAU &amp; ParaProf</h2>
 <div class="fig-row">
-<p><img data-src="img/image15.gif" class="fig-card" height="400"> <img data-src="img/image16.gif" class="fig-card" height="400"></p>
+<p><img data-src="img/image15.gif" class="fig-card" height="360"> <img data-src="img/image16.gif" class="fig-card" height="360"></p>
 </div>
 </section>
 <section id="vampir" class="slide level2 center-figs">
@@ -1075,6 +1097,8 @@ Philipp Gschwandtner
 </section>
 <section id="intel-inspector" class="slide level2">
 <h2>Intel Inspector</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>features
 <ul>
@@ -1089,6 +1113,9 @@ Philipp Gschwandtner
 </ul></li>
 <li>supports OpenMP, TBB, Pthreads, Windows threads</li>
 </ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
 <li>limitations &amp; issues
 <ul>
 <li>slowdown by 1–2 orders of magnitude!</li>
@@ -1097,6 +1124,7 @@ Philipp Gschwandtner
 <li>false positives and negatives possible</li>
 </ul></li>
 </ul>
+</div></div>
 </section>
 <section id="openmp-data-race-example-1" class="slide level2">
 <h2>OpenMP data race example 1</h2>

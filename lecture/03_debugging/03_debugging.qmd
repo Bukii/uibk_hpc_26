@@ -23,6 +23,7 @@ format:
 
 :::: {.columns}
 ::: {.column width="58%"}
+::: {style="font-size: 0.85em;"}
 - Debugging Ariane-5's maiden flight
   - booster nozzles adjusted for a 20% angle of attack, causing vehicle separation, triggering self-destruction
   - because a diagnostic bit pattern was sent to on-board computer as flight data
@@ -31,8 +32,11 @@ format:
     - and only protected 4 out of 7 critical variables against overflow and not this one because in Ariane 4 velocities were lower
     - also, this software component serves no purpose after lift-off (only used for inertial platform alignment before launch)
 :::
+:::
 ::: {.column width="42%"}
-![](img/image3.jpeg){width="100%"}
+::: {.video-4x3}
+{{< video https://www.youtube.com/watch?v=gp_D8r-2hwk >}}
+:::
 
 ::: {.aside}
 <https://www.youtube.com/watch?v=gp_D8r-2hwk>
@@ -40,10 +44,11 @@ format:
 :::
 ::::
 
-## Motivation: first Ariane-5 flight, 1996 {.smaller}
+## Motivation: first Ariane-5 flight, 1996
 
 :::: {.columns}
 ::: {.column width="58%"}
+::: {style="font-size: 0.85em;"}
 - Debugging Ariane-5's maiden flight
   - booster nozzles adjusted for a 20% angle of attack, causing vehicle separation, triggering self-destruction
   - because a diagnostic bit pattern was sent to on-board computer as flight data
@@ -52,7 +57,9 @@ format:
     - and only protected 4 out of 7 critical variables against overflow and not this one because in Ariane 4 velocities were lower
     - also, this software component serves no purpose after lift-off (only used for inertial platform alignment before launch)
 :::
+:::
 ::: {.column width="42%"}
+::: {style="font-size: 0.85em;"}
 &nbsp;
 
 <!-- one lesson per cause, in the same order as the bullets on the left -->
@@ -66,6 +73,7 @@ format:
 ➜ &nbsp;lack of proper requirement analysis
 
 ➜ &nbsp;debugging code active in release
+:::
 :::
 ::::
 
@@ -103,6 +111,7 @@ format:
 
 :::: {.columns}
 ::: {.column width="72%"}
+::: {style="font-size: 0.85em;"}
 - write clean code that prevents bugs or facilitates their detection, e.g.
   - use meaningful identifiers
   - minimize vertical distance of variables
@@ -116,26 +125,31 @@ format:
   - use continuous integration
   - use source version control
 :::
+:::
 ::: {.column width="28%"}
-![](img/image4.png){.fig-card width="100%"}
+![](img/image4.png){.fig-card fig-align="center" height="440"}
 :::
 ::::
 
 ## "Best of" real commit messages encountered in the past
 
-::: {.small}
+:::: {.columns style="font-size: 0.8em;"}
+::: {.column width="35%"}
 - `stufF`
 - `manager stuff`
 - `more manager stuff`
 - `Make things work`
 - `::w:qMerge branch 'master'`
 - `dl;adlwa`
+:::
+::: {.column width="65%"}
 - `Added performance fix for DataItemManager::get() by caching fragment result in reference`
 - `Removed debug print statement`
 - `Fixed a linking issue of the unwrap_tuple function`
 - `Redirected runtime system output to error stream`
 - `fixing typos`
 :::
+::::
 
 ## Recommended reading/reference material example
 
@@ -166,6 +180,7 @@ format:
 
 ## Serial debuggers
 
+::: {style="font-size: 0.85em;"}
 - `gdb`
   - useful for inspecting memory contents and getting call stacks
   - can work with multi-threaded programs and also MPI
@@ -179,6 +194,7 @@ format:
   - can work with multi-threaded programs (but only concurrent execution!)
   - can yield some false positives e.g. for OpenMP related to thread-local storage
   - there is a dedicated `valgrind4hpc` (mainly handles output redirection from multiple ranks)
+:::
 
 ## Sanitizers (still mostly serial)
 
@@ -191,7 +207,7 @@ format:
   - **thread**: detects data races
   - **leak**: detects memory leaks
 
-## Example 1: wrong order of arguments in MPI call {.smaller}
+## Example 1: wrong order of arguments in MPI call
 
 ```c
 MPI_Send(&A_local[0], MPI_DOUBLE, N, rank - 1, 0, MPI_COMM_WORLD);
@@ -199,7 +215,6 @@ MPI_Send(&A_local[0], MPI_DOUBLE, N, rank - 1, 0, MPI_COMM_WORLD);
 
 Compile with `-Wall -Wextra -pedantic`:
 
-::: {.small}
 ```default
 heat_2D.c: In function 'main':
 /usr/lib/.../openmpi/include/mpi.h:402:47: warning: passing argument 2 of 'MPI_Send'
@@ -216,13 +231,11 @@ heat_2D.c:110:37: warning: passing argument 3 of 'MPI_Send'
       |                                   ^
       |                                   int
 ```
-:::
 
-## Example 2: incorrect array indexing {.smaller}
+## Example 2: incorrect array indexing
 
 *"program hangs" or "receiving garbage in ghost cells"*
 
-::: {.small}
 ```default
 $ mpicc heat_2D_mpi.c -o heat_2D_mpi -O3 -fsanitize=undefined,address -g
 $ mpiexec -n 2 ./heat_2D_mpi
@@ -240,7 +253,6 @@ READ of size 6144 at 0x61f000002880 thread T0
     #8  0x402ab6      in main       heat_2D_mpi.c:116
     #9  0x14f8022add84 in __libc_start_main            (/lib64/libc.so.6+0x3ad84)
 ```
-:::
 
 ## Example 2: incorrect array indexing cont'd
 
@@ -259,9 +271,8 @@ if (rank < size - 1) {
 }
 ```
 
-## Example 3: MPI Send/Recv deadlock {.smaller}
+## Example 3: MPI Send/Recv deadlock
 
-::: {.small}
 ```default
 $ mustrun -np 2 ./heat_stencil_2D_mpi --must:output stdout
 
@@ -280,7 +291,6 @@ $ mustrun -np 2 ./heat_stencil_2D_mpi --must:output stdout
 [MUST-REPORT] Stacktrace:
 [MUST-REPORT] #0  main@heat_stencil_2D_mpi.c:83
 ```
-:::
 
 Live demo with MUST (<https://itc.rwth-aachen.de/must/>)!
 
@@ -290,6 +300,7 @@ Live demo with MUST (<https://itc.rwth-aachen.de/must/>)!
 
 ## Parallel debuggers
 
+::: {style="font-size: 0.8em;"}
 - very little free software
 - two commercial top dogs: DDT (Linaro) and TotalView (Perforce Software)
   - support OpenMP, MPI, CUDA, etc.
@@ -304,6 +315,7 @@ Live demo with MUST (<https://itc.rwth-aachen.de/must/>)!
   - **ARCHER**: data race detector for OpenMP
   - **STAT**: trace analysis tool to group ranks with similar behavior for easier analysis
   - **AutomaDeD**: uses heuristics to find dissimilarities in rank behaviors
+:::
 
 ## DDT screenshot (overview) {.center-figs}
 
@@ -328,6 +340,8 @@ Live demo with MUST (<https://itc.rwth-aachen.de/must/>)!
 
 ## Domain-specific debugging
 
+:::: {.columns}
+::: {.column width="45%"}
 - visualize the output using appropriate tools
   - gnuplot
   - matplotlib
@@ -335,12 +349,15 @@ Live demo with MUST (<https://itc.rwth-aachen.de/must/>)!
   - …
 - note that this usually prohibits automatic checking
   - whenever feasible, unit and integration tests are preferred
-
+:::
+::: {.column width="55%"}
 ::: {.fig-row}
 ![](img/image10.jpeg){height="215"}
 ![](img/image11.jpeg){height="215"}
 ![](img/image12.gif){.fig-card height="215"}
 :::
+:::
+::::
 
 ## Best approach to debugging parallel programs
 
@@ -351,10 +368,11 @@ Live demo with MUST (<https://itc.rwth-aachen.de/must/>)!
   - *"this C++ object's destructor will be called at the end of the full-expression"*
 - Don't trust (seemingly) "automagic" analysis tools too much (LLMs!!!), read and understand the source code when available!
 
-## Supercomputer-specific information {.smaller}
+## Supercomputer-specific information
 
 :::: {.columns}
 ::: {.column width="42%"}
+::: {style="font-size: 0.85em;"}
 - check available SLURM QOS and partitions
   - e.g. VSC5 shown on the right
 - use interactive jobs
@@ -364,8 +382,9 @@ Live demo with MUST (<https://itc.rwth-aachen.de/must/>)!
   - e-mail notifications for (some) job state changes
   - Don't run anything parallel on the login node that has even a remote chance of running >1 second!
 :::
+:::
 ::: {.column width="58%"}
-::: {.small}
+::: {style="font-size: 0.7em;"}
 | QOS name | Partition | Run time limit | Description |
 | --- | --- | --- | --- |
 | `zen3_0512` | `zen3_0512` | 72h (3 days) | Default |
@@ -589,8 +608,8 @@ Overhead  Symbol      Source:Line
 ## TAU & ParaProf {.center-figs}
 
 ::: {.fig-row}
-![](img/image15.gif){.fig-card height="400"}
-![](img/image16.gif){.fig-card height="400"}
+![](img/image15.gif){.fig-card height="360"}
+![](img/image16.gif){.fig-card height="360"}
 :::
 
 ## Vampir {.center-figs}
@@ -656,6 +675,8 @@ Source: Bernd Mohr, <https://pop-coe.eu/sites/default/files/pop_files/pop-webina
 
 ## Intel Inspector
 
+:::: {.columns}
+::: {.column width="50%"}
 - features
   - free
   - Linux & Windows version
@@ -665,11 +686,15 @@ Source: Bernd Mohr, <https://pop-coe.eu/sites/default/files/pop_files/pop-webina
     - race conditions
     - vulnerabilities
   - supports OpenMP, TBB, Pthreads, Windows threads
+:::
+::: {.column width="50%"}
 - limitations & issues
   - slowdown by 1–2 orders of magnitude!
   - explicit support only for Intel OpenMP runtime
   - error detection only at runtime, only in executed control flow branches
   - false positives and negatives possible
+:::
+::::
 
 ## OpenMP data race example 1
 
