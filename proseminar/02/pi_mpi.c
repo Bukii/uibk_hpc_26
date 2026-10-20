@@ -39,9 +39,10 @@ int main(int argc, char **argv)
 	uint64_t total_points = samples;
 	uint64_t points_per_rank = samples / (uint64_t)size;
 	uint64_t extra_points = samples % (uint64_t)size;
-	uint64_t local_points = points_per_rank + ((uint64_t)rank < extra_points);
+	uint64_t local_points = points_per_rank + ((uint64_t)rank < extra_points); // giga smart
 	uint64_t local_points_inside = 0;
 	unsigned int seed = 12345 + (unsigned int)rank;
+	double start = MPI_Wtime();
 
 	for (uint64_t i = 0; i < local_points; ++i) {
 		long double x = (long double)rand_r(&seed) / (long double)RAND_MAX;
@@ -55,8 +56,10 @@ int main(int argc, char **argv)
 		       MPI_SUM, 0, MPI_COMM_WORLD);
 
 	if (rank == 0) {
+		double elapsed = MPI_Wtime() - start;
 		long double pi = 4 * (long double)points_inside / (long double)total_points;
 		printf("pi      = %.4Lf\n", pi);
+		printf("time    = %.6f seconds\n", elapsed);
 	}
 
 	MPI_Finalize();

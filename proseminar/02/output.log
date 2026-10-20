@@ -1,0 +1,27 @@
+Sequential:
+pi      = 3.1416
+time    = 23.183330 seconds
+
+MPI ranks: 1
+pi      = 3.1416
+time    = 23.311672 seconds
+
+MPI ranks: 6
+pi      = 3.1416
+time    = 4.296937 seconds
+
+MPI ranks: 12
+pi      = 3.1416
+time    = 2.054920 seconds
+
+MPI ranks: 24
+pi      = 3.1416
+time    = 1.122981 seconds
+
+MPI ranks: 48
+pi      = 3.1416
+time    = 0.578822 seconds
+
+MPI ranks: 96
+pi      = 3.1416
+time    = 0.324920 seconds
