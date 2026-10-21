@@ -26,17 +26,21 @@
         aria-label="Toggle light / dark theme"></button>
 
 <style>
-  /* the slot next to Quarto's menu button, which sits at left: 8px */
+  /* the slot next to Quarto's menu button. Like it (see shared/uibk.scss),
+     sized in slide pixels via reveal's --slide-scale, so it grows with the
+     slides; these are the sizes it had in a 1280x720 window (scale 0.92). */
   .theme-toggle {
+    --s: var(--slide-scale, 1);
     position: fixed;
-    left: 54px;
-    bottom: 8px;
+    /* menu button's left offset + its icon width + a gap */
+    left: calc(20.5px * var(--s) + max(1.3rem, calc(38px * var(--s))));
+    bottom: calc(9px * var(--s));
     z-index: 30;
-    width: 2.2rem;
-    height: 2.2rem;
+    width: max(1.3rem, calc(38px * var(--s)));
+    height: max(1.3rem, calc(38px * var(--s)));
     padding: 0;
-    line-height: 2.2rem;
-    font-size: 1.5rem;
+    line-height: max(1.3rem, calc(38px * var(--s)));
+    font-size: max(0.9rem, calc(26px * var(--s)));
     cursor: pointer;
     background: none;
     border: none;
