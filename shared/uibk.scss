@@ -49,6 +49,35 @@ $tiny: 0.55;
 .reveal .aside { font-size: 0.55em; color: #9fb0c3; }
 .reveal .slide-number { color: $uibk-orange; }
 
+// Quarto draws the footer, slide number and menu button outside reveal's
+// scaled slide area, in fixed pixel sizes meant for a ~1280px window. The
+// slides themselves grow with the window (up to max-scale), so on a large or
+// high-resolution display the footer ended up tiny next to the slide text.
+// Size this bottom row in slide pixels instead, via the --slide-scale reveal
+// sets on the viewport -- the values below are what Quarto shows in a
+// 1280x720 window (scale 0.92). The floor keeps the text legible in small
+// windows. shared/theme.html does the same for the theme toggle.
+$chrome-scale: var(--slide-scale, 1);
+.reveal-viewport .reveal .footer {
+  font-size: max(12px, calc(19.5px * #{$chrome-scale}));
+  bottom: calc(19.5px * #{$chrome-scale});
+}
+.reveal-viewport .reveal .slide-number {
+  font-size: max(11px, calc(17.5px * #{$chrome-scale}));
+  bottom: calc(11px * #{$chrome-scale});
+  right: calc(11px * #{$chrome-scale});
+}
+.reveal-viewport .reveal .slide-menu-button {
+  left: calc(9px * #{$chrome-scale});
+  bottom: calc(9px * #{$chrome-scale});
+}
+.reveal-viewport .reveal .slide-menu-button .fas::before {
+  $icon: max(1.3rem, calc(38px * #{$chrome-scale}));
+  width: $icon;
+  height: $icon;
+  background-size: $icon $icon;
+}
+
 // Third-party screenshots and charts were drawn for a white page. Dropped
 // straight onto a black slide they either glare, or -- for dark line art on a
 // transparent background -- disappear entirely. A light card keeps them
