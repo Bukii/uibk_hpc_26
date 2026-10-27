@@ -21,5 +21,10 @@ example_2.c:32:28: warning: operation on 'rank' may be undefined [-Wsequence-poi
       |                      ~~~~~~^~~~~~~~~~~
 ```
 - Is there anything else that can be done to highlight or avoid bugs?
-    - asd
-- 
+    - always use error checks (e.g. null checks) after certain event calls
+    - prefer sendrecv over hand written send/recv
+    - check MPI return values
+
+## Exercise 2
+
+see `./ex2/prompts.md` and `./ex2/debug-report.md`
