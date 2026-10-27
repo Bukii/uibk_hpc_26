@@ -1,5 +1,5 @@
 CC=mpicc
-CFLAGS=-std=gnu11 -Wall -Wextra -pedantic -fsanitize=address,undefined -g -Og
+CFLAGS=-std=gnu11 -Wall -Wextra -pedantic -fsanitize=address,undefined,leak,thread -g -Og
 
 .PHONY: all
 all: example_1 example_2

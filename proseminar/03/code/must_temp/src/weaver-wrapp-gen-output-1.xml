@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><wrappgen-output>
-	<extra-sources>
-<source>.//weaver-wrapp-gen-output-1.cppGenRecord.c</source>
-	</extra-sources>
-	<extra-libs>
-<lib>libGtiTLS.so</lib>
-	</extra-libs>
-</wrappgen-output>
