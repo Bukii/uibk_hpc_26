@@ -1,5 +1,5 @@
 CC=mpicc
-CFLAGS=-std=gnu11 -Wall -Wextra -pedantic -fsanitize=undefined,address -g -Og
+CFLAGS=-std=gnu11 -Wall -Wextra -pedantic -fsanitize=undefined -g -Og
 
 .PHONY: all
 all: example_1 example_2
@@ -12,4 +12,4 @@ example_2: example_2.c
 
 .PHONY: clean
 clean:
-	@rm example_1 example_2
+	@rm -f example_1 example_2

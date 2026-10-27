@@ -13,7 +13,6 @@ int main(int argc, char** argv) {
     // int i; // not used
 	const int count = 10;
 	int tag = 42;  /* tag used for all communication */
-	int tag2 = tag + 1; /* extra tag used for what ever you want */
 	int good_data = 1;
 	int data[count];   /* data buffers */
 	MPI_Status status; /* status of MPI_Recv() operation */
@@ -30,11 +29,11 @@ int main(int argc, char** argv) {
 			data[i] = i; /* initialize all other data buffers from 0 to count */
 
 	if(myrank == 0) {
-		for(int i = 0; i < nprocs; i++) {
-			MPI_Send(&data, count, MPI_INT, i, tag, MPI_COMM_WORLD);
+		for(int i = 1; i < nprocs; i++) {
+			MPI_Send(data, count, MPI_INT, i, tag, MPI_COMM_WORLD);
 		}
 	} else {
-		MPI_Recv(&data, count, MPI_INT, 0, tag2, MPI_COMM_WORLD, &status);
+		MPI_Recv(data, count, MPI_INT, 0, tag, MPI_COMM_WORLD, &status);
 	}
 
 	MPI_Barrier(MPI_COMM_WORLD);
