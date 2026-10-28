@@ -272,7 +272,7 @@ Philipp Gschwandtner
 <li><em>cpu time</em>
 <ul>
 <li>wall time for each rank</li>
-<li>cumulative over all ranks, varies with degree of parallelism</li>
+<li>sum over all ranks, varies with parallelism</li>
 <li>the default when talking “costs”</li>
 </ul></li>
 </ul>
@@ -546,7 +546,7 @@ Philipp Gschwandtner
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div class="small">
+<div class="smaller">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>FP_ARITH_INST_RETIRED.SCALAR_DOUBLE</span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>FP_ARITH_INST_RETIRED.SCALAR_SINGLE</span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE</span>
@@ -557,11 +557,11 @@ Philipp Gschwandtner
 <span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>FP_ARITH_INST_RETIRED.512B_PACKED_SINGLE</span>
 <span id="cb4-9"><a href="" aria-hidden="true" tabindex="-1"></a>UOPS_EXECUTED.X87</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-
-</div></div>
-<aside><div>
+<div class="small">
 <p>(a few floating point counters available on Intel Tiger Lake CPUs)</p>
-</div></aside></section>
+</div>
+</div></div>
+</section>
 <section id="performance-counters" class="slide level2">
 <h2>Performance counters</h2>
 <ul>
@@ -611,12 +611,10 @@ Philipp Gschwandtner
 </ul></li>
 </ul>
 </div><div class="column" style="width:54%;">
-<p><img data-src="img/image13.png" class="fig-card" style="width:100.0%"></p>
-
+<p><img data-src="img/image13.png" class="fig-card" style="width:100.0%"> ::: {.small} Taken from the November 2024 list of the Top500</p>
 </div></div>
-<aside><div>
-<p>Taken from the November 2024 list of the Top500</p>
-</div></aside></section>
+<p>::::</p>
+</section>
 <section id="application-throughput" class="slide level2">
 <h2>Application throughput</h2>
 <ul>
@@ -774,8 +772,7 @@ Philipp Gschwandtner
 <ul>
 <li>depends on how high you aim
 <ul>
-<li><em>“I have shown in a proof-of-concept that this might work in some selected cases”</em></li>
-<li>vs.</li>
+<li><em>“I have shown in a proof-of-concept that this might work in some selected cases”</em> vs.</li>
 <li><em>“I have shown that this generally works in all cases”</em></li>
 </ul></li>
 <li>more hardware (or software!) coverage is always better
@@ -851,7 +848,7 @@ Philipp Gschwandtner
 <li>devise and implement the simplest, most straight-forward parallel solution that you can think of</li>
 <li>measure the performance (or whatever metric you are interested in) to obtain a point of reference</li>
 <li>improve your program based on your measurements</li>
-<li><code>while(!) { step2(); step3(); }</code></li>
+<li><code>while(!😊) { step2(); step3(); }</code></li>
 </ol>
 </section>
 <section id="sequential-equivalence" class="slide level2">
