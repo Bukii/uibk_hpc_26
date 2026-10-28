@@ -45,7 +45,7 @@ $$t_\text{wall} = \max_{0 \le i < N}\left(t_{\text{end},i}\right) - \min_{0 \le 
 ::: {.column width="50%"}
 - *cpu time*
   - wall time for each rank
-  - cumulative over all ranks, varies with degree of parallelism
+  - sum over all ranks, varies with parallelism
   - the default when talking "costs"
 
 $$t_\text{cpu} = \sum_{i=0}^{N-1} t_i$$
@@ -252,7 +252,7 @@ D = A * B + C * A + B;  // 4 Ops, 2 Ins
   - there are also tools to automatically build models, of varying quality…
 :::
 ::: {.column width="50%"}
-::: {.small}
+::: {.smaller}
 ```default
 FP_ARITH_INST_RETIRED.SCALAR_DOUBLE
 FP_ARITH_INST_RETIRED.SCALAR_SINGLE
@@ -265,10 +265,10 @@ FP_ARITH_INST_RETIRED.512B_PACKED_SINGLE
 UOPS_EXECUTED.X87
 ```
 :::
-
-::: {.aside}
+::: {.small}
 (a few floating point counters available on Intel Tiger Lake CPUs)
 :::
+
 :::
 ::::
 
@@ -311,10 +311,10 @@ $ perf stat ./heat_stencil_1D_seq
 :::
 ::: {.column width="54%"}
 ![](img/image13.png){.fig-card width="100%"}
-
-::: {.aside}
+::: {.small}
 Taken from the November 2024 list of the Top500
 :::
+
 :::
 ::::
 
@@ -414,8 +414,7 @@ Taken from the November 2024 list of the Top500
 ## Running on multiple systems
 
 - depends on how high you aim
-  - *"I have shown in a proof-of-concept that this might work in some selected cases"*
-  - vs.
+  - *"I have shown in a proof-of-concept that this might work in some selected cases"* vs.
   - *"I have shown that this generally works in all cases"*
 - more hardware (or software!) coverage is always better
   - but trade-off between porting effort and benefits
@@ -467,7 +466,7 @@ Taken from the November 2024 list of the Top500
 1. devise and implement the simplest, most straight-forward parallel solution that you can think of
 2. measure the performance (or whatever metric you are interested in) to obtain a point of reference
 3. improve your program based on your measurements
-4. `while(!) { step2(); step3(); }`
+4. `while(!😊) { step2(); step3(); }`
 
 ## Sequential equivalence
 
