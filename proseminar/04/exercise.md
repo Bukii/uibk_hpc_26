@@ -66,3 +66,19 @@ domain-independent metric is **parallel efficiency**, calculated as speedup divi
 Both programs also perform an internal sanity check: every final temperature must remain between the ambient temperature of `273 K` and the source temperature of `333 K`. The MPI program combines the local results with `MPI_Reduce`, so rank 0 reports `Verification: OK` only if every process passes this check. The runs in `heat_stencil_2D_mpi.log` all reported `Verification: OK`.
 
 ## Exercise 2
+
+The non-blocking implementations were benchmarked with `N=256`, `512`, and
+`768`, using 1, 4, 16, 32, 64, and 96 MPI ranks.
+
+The runtime comparison is shown below. The logarithmic y-axis is needed
+because the 1D and 2D workloads have very different costs.
+
+![Non-blocking heat-stencil runtime comparison](heat_stencil_nonblocking/heat_stencil_nonblocking_runtime.svg)
+
+The speedup and parallel-efficiency plots show the strong-scaling behavior.
+For the 2D stencil, the largest problem reaches a speedup of about 50.8 with
+96 ranks, corresponding to approximately 53% parallel efficiency. The 1D
+problem becomes communication-dominated much earlier because each process
+exchanges only a few values while doing comparatively little computation.
+
+![Non-blocking heat-stencil scaling metrics](heat_stencil_nonblocking/heat_stencil_nonblocking_scaling.svg)
