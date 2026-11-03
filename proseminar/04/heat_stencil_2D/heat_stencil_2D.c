@@ -1,5 +1,8 @@
+#define _POSIX_C_SOURCE 200809L
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef double value_t;
 
@@ -59,6 +62,14 @@ int main(int argc, char **argv) {
   // create a second buffer for the computation
   Vector B = createVector(N);
 
+  struct timespec start;
+  if (clock_gettime(CLOCK_MONOTONIC, &start) != 0) {
+    perror("clock_gettime");
+    releaseVector(B);
+    releaseVector(A);
+    return EXIT_FAILURE;
+  }
+
   // for each time step ..
   for (int t = 0; t < T; t++) {
     // .. we propagate the temperature
@@ -94,12 +105,23 @@ int main(int argc, char **argv) {
     B = H;
 
     // show intermediate step
-    if (!(t % 1000)) {
-      printf("Step t=%d:\n", t);
-      printTemperature(A, N);
-      printf("\n");
-    }
+    // if (!(t % 1000)) {
+    //   printf("Step t=%d:\n", t);
+    //   printTemperature(A, N);
+    //   printf("\n");
+    // }
   }
+
+  struct timespec end;
+  if (clock_gettime(CLOCK_MONOTONIC, &end) != 0) {
+    perror("clock_gettime");
+    releaseVector(B);
+    releaseVector(A);
+    return EXIT_FAILURE;
+  }
+  double wall_time = (double)(end.tv_sec - start.tv_sec) +
+                     (double)(end.tv_nsec - start.tv_nsec) / 1e9;
+  printf("Wall time: %.6f seconds\n", wall_time);
 
   releaseVector(B);
 

@@ -40,6 +40,12 @@ MLUPS = N² · T / runtime / 10⁶
 
 It measures the amount of heat-stencil work completed per second. 
 
+`N² · T` := Total updates
+
+`N² · T / runtime` := Total updates per second
+
+`N² · T / runtime / 10⁶` := convert to millions
+
 domain-independent metric is **parallel efficiency**, calculated as speedup divided by the number of MPI ranks. ![heat_stencil_2D_metrics.svg](heat_stencil_2D/heat_stencil_2D_metrics.svg).
 
 | MPI ranks | MLUPS | Parallel efficiency |
